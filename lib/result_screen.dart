@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({Key? key, required this.score, required this.result}) : super(key: key);
+  const ResultScreen({Key? key, required this.score, required this.result, required this.category}) : super(key: key);
 
   final String score;
   final String result;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          ('BMI'),
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('BmiPal', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,),),
+            Image.asset(
+              'images/bmi_icon.png',
+              fit: BoxFit.contain,
+              height: 30,
+            ),
+          ],
         ),
       ),
       body: Container (
-        margin: const EdgeInsets.all(30.0),
+        margin: const EdgeInsets.all(35.0),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -27,20 +33,23 @@ class ResultScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(top:200),
-                  ),
                   Text(
-                    result,
+                    "BMI: $score ($category)",
                     style: const TextStyle(
-                      fontSize: 24.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    score,
+                    result,
                     style: const TextStyle(
-                      fontSize: 26.0,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  const Text(
+                    "The healthy range for BMI is between 18.5 and 24.9.",
+                    style: TextStyle(
+                      fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -50,13 +59,14 @@ class ResultScreen extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: Colors.black,
+                  color: Colors.indigo,
                 ),
-                margin: const EdgeInsets.only(top: 200.0),
+                margin: const EdgeInsets.only(top: 150.0),
                 width: double.infinity,
                 height: 80.0,
                 child: const Center(
